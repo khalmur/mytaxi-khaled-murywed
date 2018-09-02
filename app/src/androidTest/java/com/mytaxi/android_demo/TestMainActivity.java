@@ -3,7 +3,6 @@ package com.mytaxi.android_demo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import okhttp3.OkHttpClient;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.mytaxi.android_demo.api.Response;
@@ -16,11 +15,11 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 
 import com.mytaxi.android_demo.activities.MainActivity;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,10 +41,8 @@ import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.mytaxi.android_demo.misc.Constants.LOG_TAG;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 public class TestMainActivity {
@@ -57,7 +54,7 @@ public class TestMainActivity {
     private String searchText = "sa";
     private String matchText = "Sarah Scott";
     private String PREFS_NAME = "MytaxiPrefs";
-    public static final String BASE_URL = "https://randomuser.me/";
+    private String BASE_URL = "https://randomuser.me/";
 
     private MainActivity mActivity = null;
 
@@ -122,7 +119,7 @@ public class TestMainActivity {
             //Click call button
             onView(withId(R.id.fab)).perform(click());
         } catch (NoMatchingViewException e){
-            fail("Not on map view");
+            Assert.fail("Not on map view, skipping test");
         }
     }
 
