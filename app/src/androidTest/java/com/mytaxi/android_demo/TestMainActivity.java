@@ -45,6 +45,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.mytaxi.android_demo.misc.Constants.LOG_TAG;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 public class TestMainActivity {
@@ -54,6 +55,7 @@ public class TestMainActivity {
     private String validUsername;
     private String validPassword;
     private String searchText = "sa";
+    private String matchText = "Sarah Scott";
     private String PREFS_NAME = "MytaxiPrefs";
     public static final String BASE_URL = "https://randomuser.me/";
 
@@ -114,13 +116,13 @@ public class TestMainActivity {
             //Close keyboard
             closeSoftKeyboard();
             //Select 2nd name returned in list
-            onView(withText("Sarah Scott"))
+            onView(withText(matchText))
                     .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                     .perform(click());
             //Click call button
             onView(withId(R.id.fab)).perform(click());
         } catch (NoMatchingViewException e){
-            Log.d(LOG_TAG,"Not on map view, skipping test");
+            fail("Not on map view");
         }
     }
 
