@@ -119,7 +119,7 @@ public class TestMainActivity {
             //Click call button
             onView(withId(R.id.fab)).perform(click());
         } catch (NoMatchingViewException e){
-            Assert.fail("Not on map view, skipping test");
+            Assert.fail("Test Fail");
         }
     }
 
